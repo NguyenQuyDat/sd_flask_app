@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log</title>
+</head>
+<body>
+<h1>Log: </h1>
+{% if log %}
+<ul>
+  {% for line in log %}
+  <li>{{ line }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+  <h1>No log!</h1>
+{% endif %}
+</body>
+</html>
