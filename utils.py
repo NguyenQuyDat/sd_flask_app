@@ -43,7 +43,8 @@ def save_image_from_camera():
                 cv2.imwrite(image_path, image)
 
             # Save the newest image
-            cv2.imwrite(config.Config.IMAGE_FILE_PATH, image)
+            resized_image = cv2.resize(image, (960, 540))
+            cv2.imwrite(config.Config.IMAGE_FILE_PATH, resized_image)
 
             nr_frames = (nr_frames + 1) % frame_offset
 
