@@ -32,15 +32,18 @@ def save_image_from_camera():
     video_cap = cv2.VideoCapture(0)
     video_fps = video_cap.get(cv2.CAP_PROP_FPS)
     nr_frames = 0
-    frame_offset = video_fps / config.Config.IMAGE_FPS
+    frame_offset = int(video_fps / config.Config.IMAGE_FPS)
     while video_cap.isOpened():
         ret, image = video_cap.read()
         if image is not None:
+            # Save image, if necessary
             if nr_frames % frame_offset == 0:
                 image_path = str(time.time()) + '.jpg'
                 image_path = os.path.join(save_dir, image_path)
                 cv2.imwrite(image_path, image)
-                cv2.imwrite(config.Config.IMAGE_FILE_PATH, image)
+
+            # Save the newest image
+            cv2.imwrite(config.Config.IMAGE_FILE_PATH, image)
 
             nr_frames = (nr_frames + 1) % frame_offset
 
